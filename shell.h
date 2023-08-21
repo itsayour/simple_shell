@@ -12,5 +12,6 @@
 
 extern char **environ;
 char **split_string(char *buffer, char *deli);
+char _getenv(const charenv_var);
 
 #endif
