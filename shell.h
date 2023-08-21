@@ -11,4 +11,6 @@
 #include <ctype.h>
 
 extern char **environ;
+char **split_string(char *buffer, char *deli);
+
 #endif
