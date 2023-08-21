@@ -1,3 +1,4 @@
+#include "shell.h"
 char *_getenv(const char *env_var)
 {
     extern char **environ;
@@ -7,7 +8,7 @@ char *_getenv(const char *env_var)
     while (environ[i])
     {
         key = strtok(environ[i], "=");
-        if (strcmp(key, env_var) == 0)
+        if (_strcmp(key, env_var) == 0)
             return (strtok(NULL, "="));
         i++;
     }

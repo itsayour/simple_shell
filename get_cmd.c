@@ -1,3 +1,4 @@
+#include "shell.h"
 char *get_command(char *command)
 {
     char *path = _getenv("PATH");
@@ -8,10 +9,10 @@ char *get_command(char *command)
     token = strtok(path, ":");
     while (token)
     {
-        cmd_full = malloc(strlen(token) + strlen(command) + 2);
-        strcpy(cmd_full, token);
-        strcat(cmd_full, "/");
-        strcat(cmd_full, command);
+        cmd_full = malloc(_strlen(token) + _strlen(command) + 2);
+        _strcpy(cmd_full, token);
+        _strcat(cmd_full, "/");
+        _strcat(cmd_full, command);
         if (stat(cmd_full, &st) == 0)
                 return (cmd_full);
         free(cmd_full);
