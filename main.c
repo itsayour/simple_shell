@@ -9,21 +9,20 @@ char *get_command(char *command)
 	char *cmd_full;
 	struct stat st;
 
-    token = strtok(path, ":");
-    while (token)
-    {
-        cmd_full = malloc(_strlen(token) + _strlen(command) + 2);
-        _strcpy(cmd_full, token);
-        _strcat(cmd_full, "/");
-        _strcat(cmd_full, command);
-        if (stat(cmd_full, &st) == 0)
-                return (cmd_full);
-        free(cmd_full);
-        token = strtok(NULL, ":");
-    }
-    return (NULL);
+	token = strtok(path, ":");
+	while (token)
+	{
+		cmd_full = malloc(_strlen(token) + _strlen(command) + 2);
+		_strcpy(cmd_full, token);
+		_strcat(cmd_full, "/");
+		_strcat(cmd_full, command);
+		if (stat(cmd_full, &st) == 0)
+			return (cmd_full);
+		free(cmd_full);
+		token = strtok(NULL, ":");
+	}
+	return (NULL);
 }
-
 
 int main(int ac, char **av, char **env)
 {
@@ -38,7 +37,7 @@ int main(int ac, char **av, char **env)
 
 	while (1)
 	{
-		write(1,"#cisfun$ ",9);
+		write(1, "#cisfun$ ", 9);
 		n_chars = getline(&buffer, &buffer_size, stdin);
 		if (n_chars == -1)
 		{
