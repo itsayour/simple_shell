@@ -14,6 +14,6 @@ char **split_string(char *buffer, char *deli)
 		token = strtok(NULL, deli);
 		i++;
 	}
-	tokens[i] = NULL; 
+	tokens[i] = NULL;
 	return (tokens);
 }

@@ -4,10 +4,10 @@
 
 char *get_command(char *command)
 {
-    char *path = _getenv("PATH");
-    char *token;
-    char *cmd_full;
-    struct stat st;
+	char *path = _getenv("PATH");
+	char *token;
+	char *cmd_full;
+	struct stat st;
 
     token = strtok(path, ":");
     while (token)
