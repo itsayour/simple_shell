@@ -1,70 +1,34 @@
 #include "shell.h"
-
 /**
- * *get_command - function that 
+ * main - Entry point
  *
- *
+ * Return: Always 0
  */
-
-char *get_command(char *command)
+int main(void)
 {
-	char *path = _getenv("PATH");
-	char *token;
-	char *cmd_full;
-	struct stat st;
-
-	token = strtok(path, ":");
-	while (token)
-	{
-		cmd_full = malloc(_strlen(token) + _strlen(command) + 2);
-		_strcpy(cmd_full, token);
-		_strcat(cmd_full, "/");
-		_strcat(cmd_full, command);
-		if (stat(cmd_full, &st) == 0)
-			return (cmd_full);
-		free(cmd_full);
-		token = strtok(NULL, ":");
-	}
-	return (NULL);
-}
-
-int main(int ac, char **av, char **env)
-{
+	bool run = true;
+	int status = 0;
 	char *buffer = NULL;
 	size_t buffer_size = 0;
-	char *cmd;
-	char **args;
-	pid_t pid;
-	int status, n_chars;
-	(void) ac;
-	(void) av;
+	ssize_t rn;
+	char *tokens[100] = {0};
 
-	while (1)
+	while (run)
 	{
-		write(1, "#cisfun$ ", 9);
-		n_chars = getline(&buffer, &buffer_size, stdin);
-		if (n_chars == -1)
-		{
-			write(1, "\n", 1);
-			exit(1);
-		}
-		args = split_string(buffer, " \t\n");
-		if (_strcmp(args[0], "exit") == 0)
-			exit(0);
-		pid = fork();
-		if (pid == 0)
-		{
-			cmd = get_command(args[0]);
-			if (cmd)
-				execve(cmd, args, env);
-			else
-				_puts("cmd not found\n");
-			exit(0);
-		}
+		if (isatty(STDIN_FILENO))
+			write(1, "#cisfun$ ", 9);
 		else
+			run = false;
+		rn = getline(&buffer, &buffer_size, stdin);
+		if (rn == -1)
 		{
-			wait(&status);
+			if (!isatty(STDIN_FILENO))
+			{
+				free(buffer);
+				break;
+			}
+			perror("getline");
+			free(buffer);
+			exit(status);
 		}
-		return (0);
 	}
-}
