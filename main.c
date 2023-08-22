@@ -1,6 +1,4 @@
 #include "shell.h"
-#include "split_string.h"
-#include "strfunctions.h"
 
 char *get_command(char *command)
 {
