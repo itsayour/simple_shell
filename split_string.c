@@ -1,5 +1,13 @@
 #include "shell.h"
 
+/**
+ * **split_string - function that split a given string into an array of tokens
+ * @buffer: the input string to be split
+ * @deli: the delimiter used to separate the string into tokens.
+ *
+ * Return: tokens
+ */
+
 char **split_string(char *buffer, char *deli)
 {
 	char **tokens;

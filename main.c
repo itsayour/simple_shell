@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * *get_command - function that 
+ *
+ *
+ */
+
 char *get_command(char *command)
 {
 	char *path = _getenv("PATH");
