@@ -37,24 +37,6 @@ char *_strcat(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
-
-/**
- * _strcmp - function that compares two strings.
- *
- * @s1: pointer of the first string to be compared.
- * @s2: pointer of the second string to be compared.
- * Return: integer.
- */
-int _strcmp(const char *s1, const char *s2)
-{
-	while (*s1 != '\0' && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
-}
-
 /**
   * _strcpy - copys str to another
   * @dest: destination string
@@ -77,18 +59,41 @@ char *_strcpy(char *dest, char *src)
 	return (dest);
 }
 /**
- *  _puts - print string to stdout
- * @str: pointer to string.
- * Return: Always 0.
+ * _strdup - duplicate str and returns a ptr to newly allocated str.
+ * @str: ptr to be duplicated.
+ * Return: NULL or str1.
  */
-void _puts(char *str)
+char *_strdup(char *str)
 {
-	int i = 0;
+	char *str1;
+	unsigned int len;
 
-	while (str[i] != '\0')
+	if (str == 0)
 	{
-		_putchar(str[i]);
-		i++;
+		return (NULL);
 	}
-	_putchar('\n');
+	len = _strlen(str) + 1;
+	str1 = (char *)malloc(sizeof(char) * len);
+	if (str1 == 0)
+	{
+		return (NULL);
+	}
+	_memcpy(str1, str, len);
+	return (str1);
 }
+/**
+ * _memcpy - function that copies memory area.
+ * @dest: destination memory area.
+ * @src: source memory ares.
+ * @n: number of bytes to be copied.
+ * Return: dest.
+ */
+char *_memcpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int i;
+
+	for (i = 0; i < n; i++)
+	{
+		dest[i] = src[i];
+	}
+	return (dest);
